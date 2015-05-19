@@ -18,7 +18,7 @@ function initLocationSharing(location_callback, error_callback){
     // ================================
     // Setup Socket IO
     // ================================
-    var socket = io.connect('server3.tezzt.nl:3001');
+    var socket = io.connect('server3.tezzt.nl:3002');
     socket.on('connect', function () {
         socket.on('information', function(information){
             if(information.id != userInfo.id) {
@@ -28,7 +28,7 @@ function initLocationSharing(location_callback, error_callback){
     });
 
     // ================================
-    // Setup Geolocation  
+    // Setup Geolocation
     // ================================
     if (!navigator.geolocation) {
         return userInfo;
