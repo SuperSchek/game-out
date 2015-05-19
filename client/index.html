@@ -1,29 +1,25 @@
-<!DOCTYPE html>
-<html data-ng-app="myApp">
-<head>
-    <title>Book demo</title>
-</head>
-<body>
+<html>
+    <head>
+        <title>Real time Location sharing with HTML5, Socket.IO, and Node.js</title>
+    </head>
+    <body>
+        
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmXqlPi1nGaMrgChKUjIzHBs7AWrGXJaA&sensor=true"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-<h1>Book demo</h1>
-
-<a id="homeLink" href="/#/">Home</a> | <a id="newLink" href="/#/books/new">New</a>
-
-<div data-ng-view=""></div>
-
-<hr>
-<div id="myCtrl" data-ng-controller="myCtrl as settings">{{whoami}}</div>
-
-<!-- Lib -->
-<script src="./javascripts/lib/angular.min.js"></script>
-<script src="./javascripts/lib/angular-route.min.js"></script>
-<script src="./javascripts/lib/angular-resource.min.js"></script>
-
-<!-- App -->
-<script src="./javascripts/app.js"></script>
-<script src="./javascripts/controllers.js"></script>
-<script src="./javascripts/services.js"></script>
+        <script type="text/javascript" src="./jquery.min.js"></script>
+        <script type="text/javascript" src="./location-sharing.js"></script>
+        <script type="text/javascript" src="./mapInteracties.js"></script>
 
 
-</body>
+        <style>
+            #map-canvas  { height: 100%; width:100%; }
+            #user-number { font-size: 15px; font-weight: bold; font-color:black;}
+        </style>
+
+        <p>there are other <a href="#" id="user-number" onclick="move_to_otheruser()">0</a> users viewing this page with you.</p>
+        <button name="knopje" onclick="plaatsDing()">Voeg vlag/coin toe</button>
+        <div id="map-canvas"></div>
+
+    </body>
 </html>
