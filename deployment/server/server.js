@@ -89,7 +89,7 @@ app.post('/webhook', function (req, res) {
         });
     };
 
-    if (req.body.repository.url === config.repoUrl) {
+    if (true || req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
         reqBody = JSON.stringify(req.body);
         console.log('Now do a git pull for the current branch');
