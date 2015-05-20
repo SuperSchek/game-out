@@ -13,7 +13,7 @@ function initLocationSharing(location_callback, error_callback){
     }
 
     userInfo.id = guid();
-    userInfo.name = 'Anonymous' + (navigator.platform ? ' (' + navigator.platform + ')' : '');
+    userInfo.name = prompt("Geef username") + "is online op een" + (navigator.platform ? ' (' + navigator.platform + ')' : '');
     userInfo.markerArray = [];
     // ================================
     // Setup Socket IO

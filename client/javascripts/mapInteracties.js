@@ -221,6 +221,10 @@ function searchIndexCircle(position) {
     return false
 }
 
+function addScore() {
+
+}
+
 function move_to_otheruser() {
     var ids = Object.keys(users)
     ids.slice(ids.indexOf(currentUserInfo.id), 1);
