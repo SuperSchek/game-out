@@ -12,7 +12,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 // For serving static files inside ./client
-app.use(require('express').static('/home/sjenk/public_html/client'));
+app.use(require('express').static('../client'));
 
 //// For hosing on Heroku
 //io.configure(function () {

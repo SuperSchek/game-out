@@ -1,8 +1,9 @@
-<html>
+<html ng-app = "nameApp">
     <head>
         <title>Real time Location sharing with HTML5, Socket.IO, and Node.js</title>
+        <script type="text/javascript" src="javascripts/lib/angular.min.js"></script>
     </head>
-    <body>
+    <body >
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmXqlPi1nGaMrgChKUjIzHBs7AWrGXJaA&sensor=true"></script>
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -10,16 +11,25 @@
         <script type="text/javascript" src="javascripts/jquery.min.js"></script>
         <script type="text/javascript" src="javascripts/location-sharing.js"></script>
         <script type="text/javascript" src="javascripts/mapInteracties.js"></script>
-
+        <script type="text/javascript" src="javascripts/app.js"></script>
 
         <style>
             #map-canvas  { height: 100%; width:100%; }
             #user-number { font-size: 15px; font-weight: bold; font-color:black;}
         </style>
 
+
+
+
         <p>there are other <a href="#" id="user-number" onclick="move_to_otheruser()">0</a> users viewing this page with you.</p>
         <button name="knopje" onclick="plaatsDing()">Voeg vlag/coin toe</button>
+        <tr>
+            <th>Speler</th>
+            <th>Score</th>
+        </tr>
+        <ul ng-controller="scoreCtrl">
+            <li ng-repeat="user in users">{{user.name}}</li>
+        </ul>
         <div id="map-canvas"></div>
-
     </body>
 </html>
