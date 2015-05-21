@@ -13,8 +13,9 @@ function initLocationSharing(location_callback, error_callback){
     }
 
     userInfo.id = guid();
-    userInfo.name = prompt("Geef username") + "is online op een" + (navigator.platform ? ' (' + navigator.platform + ')' : '');
+    userInfo.name = prompt("Geef username");
     userInfo.markerArray = [];
+    userInfo.score = 0;
     // ================================
     // Setup Socket IO
     // ================================
