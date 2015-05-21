@@ -2,7 +2,6 @@
 //
 var app = require('express')();
 var server = require('http').createServer(app);
-var google = require('googlemaps');
 var io = require('socket.io').listen(server);
 server.listen(3005);
 
