@@ -126,6 +126,8 @@ google.maps.Circle.prototype.contains = function(latLng) {
 
     function voegCoinsToe(){
         createCoins(rectangle.getBounds());
+       // map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+
     }
 
     function placeCoin(cords, radius){
@@ -198,19 +200,7 @@ function placeMarker(location) {
     });
     placedMarkers.push(markert);
 
-    var geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({'latLng': location}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            if (results[0].geometry.location_type == google.maps.GeocoderLocationType.ROOFTOP){
-                console.log("zit op rooftop");
-            }else{
-                console.log("niet op rooftop")
-            }
-        }else{
-            console.log("geocoderstatus niet OK"+ status);
-        }
-    });
 
 }
 
@@ -302,12 +292,9 @@ function createCoins(bounds){
         for(i = 0; i < arrayOfCoins.length; i++){
             var location = new google.maps.LatLng( arrayOfCoins[i][1] ,arrayOfCoins[i][0]);
             placeCoin(location, 5);
-            if(i == 5){
-
-                setTimeout(5000, function() { console.log("is 5");});
-            }
         }
     });
+    console.log("createcoins");
     socket.emit('getCoins', bounds);
 
 }
