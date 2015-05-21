@@ -7,6 +7,7 @@ var users = {};
 
 // Google Maps UI
 var map = null;
+var rectangle = null;
 var infowindow = null;
 var refreshTimeout = null;
 var placedMarkers = [];
@@ -100,7 +101,7 @@ google.maps.Circle.prototype.contains = function(latLng) {
                 for (var i = 0; i < placedMarkers.length; i += 1) {
                     markerPos = placedMarkers[i].getPosition();
                     var cirkel = getCircle(placedCircles,markerPos);
-                        console.log(cirkel, " de circkel");
+                       // console.log(cirkel, " de circkel");
                     if (cirkel.contains(userInfos.marker.getPosition())) {
                         placedMarkers[i].setMap(null);
                         placedCircles[i].setMap(null);
@@ -123,6 +124,15 @@ google.maps.Circle.prototype.contains = function(latLng) {
         refreshTimeout = setTimeout(refreshMarkers, 1000 * 3);
     }
 
+    function voegCoinsToe(){
+        createCoins(rectangle.getBounds());
+    }
+
+    function placeCoin(cords, radius){
+        placeMarker(cords);
+        placeCircle(cords, radius);
+    }
+
     function mapInitialize() {
         map = new google.maps.Map(document.getElementById("map-canvas"), {
             zoom: 18
@@ -134,15 +144,16 @@ google.maps.Circle.prototype.contains = function(latLng) {
             infowindow.close(map);
         });
         refreshMarkers();
-
         google.maps.event.addListener(map, "click", function (event) {
-            placeMarker(event.latLng);
-            placeCircle(event.latLng, 5);
+            placeCoin(event.latLng, 5);
             userInfo.vlagLat = event.latLng.lat();
             userInfo.vlagLng = event.latLng.lng();
             userInfo.markerArray.push(event.latLng.lat(), event.latLng.lng());
         });
 
+
+
+        var bounds;
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -150,11 +161,33 @@ google.maps.Circle.prototype.contains = function(latLng) {
                     position.coords.longitude);
 
                 map.setCenter(pos);
+                var lat1, lat2, lng1, lng2;
+
+                lat1 = position.coords.latitude + 0.001;
+                lng1 = position.coords.longitude + 0.001;
+                lat2 = position.coords.latitude - 0.001;
+                lng2 = position.coords.longitude - 0.001;
+
+
+                bounds = new google.maps.LatLngBounds(
+                    new google.maps.LatLng(lat2, lng2),
+                    new google.maps.LatLng(lat1, lng1)
+                );
+                rectangle = new google.maps.Rectangle({
+                    bounds: bounds,
+                    editable: true
+                });
+                rectangle.setMap(map);
+
             }, function () {
                 handleNoGeolocation(true);
             });
         }
+
+
+
     }
+
 
 
 
@@ -164,6 +197,21 @@ function placeMarker(location) {
         map: map
     });
     placedMarkers.push(markert);
+
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({'latLng': location}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0].geometry.location_type == google.maps.GeocoderLocationType.ROOFTOP){
+                console.log("zit op rooftop");
+            }else{
+                console.log("niet op rooftop")
+            }
+        }else{
+            console.log("geocoderstatus niet OK"+ status);
+        }
+    });
+
 }
 
 function getMarker(array, position){
@@ -246,6 +294,23 @@ function handleNoGeolocation(errorFlag) {
     }
 }
 
+function createCoins(bounds){
+    var socket = io.connect('server3.tezzt.nl:3005');
+
+    socket.on("arrayOfCoins", function(arrayOfCoins){
+        var i;
+        for(i = 0; i < arrayOfCoins.length; i++){
+            var location = new google.maps.LatLng( arrayOfCoins[i][1] ,arrayOfCoins[i][0]);
+            placeCoin(location, 5);
+            if(i == 5){
+
+                setTimeout(5000, function() { console.log("is 5");});
+            }
+        }
+    });
+    socket.emit('getCoins', bounds);
+
+}
 
 
 google.maps.event.addDomListener(window, 'load', mapInitialize);
