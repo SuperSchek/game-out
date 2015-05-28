@@ -3,7 +3,7 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-server.listen(3005);
+server.listen(6032);
 
 io.sockets.on('connection', function (socket) {
   socket.on('information', function (data) {

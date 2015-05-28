@@ -293,7 +293,7 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function createCoins(bounds){
-    var socket = io.connect('server3.tezzt.nl:3005');
+    var socket = io.connect('server3.tezzt.nl:6032');
 
     socket.on("arrayOfCoins", function(arrayOfCoins){
         var i;
