@@ -100,7 +100,6 @@ function refreshMarkers() {
             for (var i = 0; i < placedMarkers.length; i += 1) {
                 markerPos = placedMarkers[i].getPosition();
                 var cirkel = getCircle(placedCircles, markerPos);
-                console.log(cirkel, " de circkel");
                 if (cirkel.contains(userInfos.marker.getPosition())) {
                     placedMarkers[i].setMap(null);
                     placedCircles[i].setMap(null);
@@ -198,8 +197,6 @@ function placeMarker(location) {
         map: map
     });
     placedMarkers.push(markert);
-
-
 
 }
 
@@ -301,6 +298,7 @@ function createCoins(bounds){
             var location = new google.maps.LatLng( arrayOfCoins[i][1] ,arrayOfCoins[i][0]);
             placeCoin(location, 5);
         }
+        console.log(placedMarkers);
     });
     console.log("createcoins");
     socket.emit('getCoins', bounds);
