@@ -1,7 +1,9 @@
-<html ng-app = "nameApp">
+<html ng-app = "myApp">
     <head>
         <title>Real time Location sharing with HTML5, Socket.IO, and Node.js</title>
         <script type="text/javascript" src="javascripts/lib/angular.min.js"></script>
+        <script src="./javascripts/lib/angular-route.min.js"></script>
+        <script src="./javascripts/lib/angular-resource.min.js"></script>
     </head>
     <body >
 
@@ -11,27 +13,21 @@
         <script type="text/javascript" src="javascripts/jquery.min.js"></script>
         <script type="text/javascript" src="javascripts/location-sharing.js"></script>
         <script type="text/javascript" src="javascripts/mapInteracties.js"></script>
+        <script type="text/javascript" src="javascripts/controllers.js"></script>
         <script type="text/javascript" src="javascripts/app.js"></script>
+        <!--<script type="text/javascript" src="javascripts/services.js"></script>-->
 
-        <style>
-            #map-canvas  { height: 100%; width:100%; }
-            #user-number { font-size: 15px; font-weight: bold; font-color:black;}
-        </style>
+        <a href="/#/home">Home</a>
+        <a href="/#/game">Game</a>
+        <a href="/#/leaderboard">Leaderboard</a>
+        <a href="/#/myprofile">Mijn profiel</a>
+        <a href="/#/faq">FAQ</a>
+        <a href="/#/searchfriends">Zoek je vrienden</a>
+        <a href="/#/login">Login</a>
+        <div data-ng-view=""></div>
 
 
 
 
-        <p>there are other <a href="#" id="user-number" onclick="move_to_otheruser()">0</a> users viewing this page with you.</p>
-        <button name="knopje" onclick="plaatsDing()">Voeg vlag/coin toe</button>
-        <tr>
-            <th>Speler</th>
-            <th>Score</th>
-        </tr>
-        <ul ng-controller="scoreCtrl">
-            <li ng-repeat="user in users">{{user.name}}</li>
-        </ul>
-
-        <button name="knopje" onclick="voegCoinsToe()">Voeg random coins toe</button>
-        <div id="map-canvas"></div>
     </body>
 </html>
