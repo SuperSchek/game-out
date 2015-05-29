@@ -14,3 +14,7 @@ nameApp.controller('scoreCtrl', function ($scope){
     $scope.users = users;
     console.log($scope.users);
 });
+
+nameApp.controller('usersController', function($scope){
+
+});
