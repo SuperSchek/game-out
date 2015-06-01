@@ -103,44 +103,22 @@ UserSchema.pre('save', function(next) {
     next();
 });
 
-/**
- * Create instance method for hashing a password
- */
-UserSchema.methods.hashPassword = function(password) {
-    if (this.salt && password) {
-        return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
-    } else {
-        return password;
-    }
-};
-
-/**
- * Create instance method for authenticating user
- */
-UserSchema.methods.authenticate = function(password) {
-    return this.password === this.hashPassword(password);
-};
-
-/**
- * Find possible not used username
- */
-UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
-    var _this = this;
-    var possibleUsername = username + (suffix || '');
-
-    _this.findOne({
-        username: possibleUsername
-    }, function(err, user) {
-        if (!err) {
-            if (!user) {
-                callback(possibleUsername);
-            } else {
-                return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
-            }
-        } else {
-            callback(null);
+UserSchema.pre('save',
+    function(next) {
+        if (this.password) {
+            var md5 = crypto.createHash('md5');
+            this.password = md5.update(this.password).digest('hex');
         }
-    });
+
+        next();
+    }
+);
+
+UserSchema.methods.authenticate = function(password) {
+    var md5 = crypto.createHash('md5');
+    md5 = md5.update(password).digest('hex');
+
+    return this.password === md5;
 };
 
 mongoose.model('User', UserSchema);

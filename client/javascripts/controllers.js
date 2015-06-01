@@ -4,12 +4,9 @@
 
 
 
-var myApp = angular.module('myApp', ['ngRoute'])
+var myApp = angular.module('myApp', ['ngRoute', 'myApp.services'])
 
 myApp.controller('homeCtrl', function ($scope){
-    console.log(users);
-    $scope.users = users;
-    console.log($scope.users);
     $scope.probeersel = "mus mahl probieren eg  segkjhgid";
 
 });
@@ -41,6 +38,22 @@ myApp.controller('myprofileCtrl', function ($scope){
 
 
 myApp.controller('searchfriendsCtrl', function ($scope){
+
+});
+
+myApp.controller('groupsCtrl', function($scope){
+
+
+
+});
+
+myApp.controller('createGroupCtrl', function($scope, $location, $routeParams, gameoutService){
+
+    $scope.save = function(){
+        gameoutService.groups.save({}, $scope.group, function(res){
+
+        });
+    };
 
 });
 

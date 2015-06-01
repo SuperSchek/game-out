@@ -3,8 +3,10 @@
 
 /** @module Routes for books */
 /** @class */
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    passport = require('passport'),
+    router = express.Router();
+
 
 /**  book routes
 ---------------
@@ -17,6 +19,11 @@ var groupsController = require('../app/controllers/groups.js');
 
 // User Routes
 router.post('/users', userController.signup);
+router.route('/users/login').post(passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/#/login',
+    failureFlash: false
+}));
 
 // Groups Routes
 router.post('/groups', groupsController.create);

@@ -21,7 +21,7 @@ var GroupSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    user: {
+    creator: {
         type: Schema.ObjectId,
         ref: 'User'
     }

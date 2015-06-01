@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
  * Signup - allows a user to register
  */
 
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
 
     // Init Variables
     var user = new User(req.body);
@@ -18,7 +18,7 @@ exports.signup = function(req, res) {
     user.provider = 'local';
 
     // Then save the user
-    user.save(function(err) {
+    user.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: err
@@ -28,7 +28,7 @@ exports.signup = function(req, res) {
             user.password = undefined;
             user.salt = undefined;
 
-            req.login(user, function(err) {
+            req.login(user, function (err) {
                 if (err) {
                     res.status(400).send(err);
                 } else {
@@ -37,4 +37,11 @@ exports.signup = function(req, res) {
             });
         }
     });
+};
+
+exports.signin = function () {
+
+    passport.authenticate('local', { successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true });
 };

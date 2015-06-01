@@ -79,6 +79,9 @@ var fs = require('fs'),
     http = require('http'),
     express = require('express'),
     bodyParser = require('body-parser'),
+    passport = require('passport'),
+    expressSession = require('express-session'),
+    flash = require('connect-flash'),
     env,
     config,
     mongoose,
@@ -86,7 +89,8 @@ var fs = require('fs'),
     models_files,
     app,
     routes_path,
-    route_files;
+    route_files,
+    passportConfig;
 
 /**
  * Load configuration
@@ -106,7 +110,6 @@ mongoose.connection.on('error', function (err) {
     console.error('MongoDB error %s', err);
 });
 mongoose.set('debug', config.debug);
-
 
 /**
  * Bootstrap models
@@ -154,6 +157,17 @@ if (config.debug) {
 app.use(express.static(__dirname + '/../client/'));
 
 /**
+ * Set up Passport and Session
+ */
+
+passportConfig = require('./config/passport');
+passportConfig = passportConfig();
+app.use(expressSession({secret: 'gameoutSoSecretB0y!'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+/**
  * Bootstrap routes
  * @type {string}
  */
@@ -171,6 +185,7 @@ route_files.forEach(function (file) {
 app.all('*', function (req, res) {
     res.send(404);
 });
+
 
 module.exports = app;
 
