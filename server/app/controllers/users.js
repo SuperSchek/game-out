@@ -1,45 +1,47 @@
+'use strict';
+
+var mongoose = require('mongoose'),
+    passport = require('passport'),
+    User = mongoose.model('User');
+
 /**
- * Created by tom on 29-5-15.
+ * Signup - allows a user to register
  */
-var mongoose = require('mongoose')
-    , User = mongoose.model('User');
 
+exports.signup = function (req, res) {
 
-exports.retrieveAll = function (req, res) {
-    User.find(function (err, users) {
-        if (err) {
-            return res.send(err);
-        }
-
-        res.json(users);
-    });
-};
-
-
-exports.retrieveOne = function (request, response) {
-    User
-        .find()
-        .exec(function(err, data) {
-            if (err) throw err;
-            response.json(data);
-        });
-};
-
-exports.createOne = function (req, res) {
+    // Init Variables
     var user = new User(req.body);
-    console.log(req.body);
+    var message = null;
 
+    // Add missing user fields
+    user.provider = 'local';
+
+    // Then save the user
     user.save(function (err) {
         if (err) {
-            return res.send(err);
-        }
+            return res.status(400).send({
+                message: err
+            });
+        } else {
+            // Remove sensitive data before login
+            user.password = undefined;
+            user.salt = undefined;
 
-        res.send({
-            result: {
-                code: 0,
-                message: 'user added!'
-            }
-        });
+            req.login(user, function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    res.json(user);
+                }
+            });
+        }
     });
 };
 
+exports.signin = function () {
+
+    passport.authenticate('local', { successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true });
+};

@@ -1,8 +1,5 @@
-
-//
-var express = require('express');
-
-var user = require("./app/routes/routes");
+/*
+>>>>>>> 5e1f9ccb8f170a1c1b4c5147e49f1f84b6710d2e
 var app = require('express')();
 var mongoose = require('mongoose');
 var server = require('http').createServer(app);
@@ -73,4 +70,127 @@ function creatArrayOfCoins(cords){
     return randomCords;
 
 
-};
+}; */
+
+/*jslint node:true */
+"use strict";
+/** TODO: Test with static-analyzer: define module */
+
+/**
+ * Module dependencies.
+ * @type {exports}
+ */
+var fs = require('fs'),
+    http = require('http'),
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+    expressSession = require('express-session'),
+    flash = require('connect-flash'),
+    env,
+    config,
+    mongoose,
+    models_path,
+    models_files,
+    app,
+    routes_path,
+    route_files,
+    passportConfig;
+
+/**
+ * Load configuration
+ * @type {*|string}
+ */
+env = process.env.NODE_ENV || 'development';
+config = require('./config/config.js')[env];
+
+/**
+ * Bootstrap db connection
+ * @type {exports}
+ */
+mongoose = require('mongoose');
+mongoose.connect(config.db);
+
+mongoose.connection.on('error', function (err) {
+    console.error('MongoDB error %s', err);
+});
+mongoose.set('debug', config.debug);
+
+/**
+ * Bootstrap models
+ * @type {string}
+ */
+models_path = __dirname + '/app/models';
+models_files = fs.readdirSync(models_path);
+models_files.forEach(function (file) {
+    require(models_path + '/' + file);
+});
+
+/**
+ * Use express
+ * @type {*}
+ */
+app = express();
+
+/**
+ * Express settings
+ */
+app.set('port', process.env.PORT || config.port);
+
+/**
+ * Express middleware
+ */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+/**
+ * Middleware to enable logging
+ */
+
+if (config.debug) {
+    app.use(function (req, res, next) {
+        console.log('%s %s %s', req.method, req.url, req.path);
+        next();
+    });
+}
+
+/**
+ * Middleware to serve static page
+ */
+app.use(express.static(__dirname + '/../client/'));
+
+/**
+ * Set up Passport and Session
+ */
+
+passportConfig = require('./config/passport');
+passportConfig = passportConfig();
+app.use(expressSession({secret: 'gameoutSoSecretB0y!'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+/**
+ * Bootstrap routes
+ * @type {string}
+ */
+routes_path = __dirname + '/routes';
+route_files = fs.readdirSync(routes_path);
+route_files.forEach(function (file) {
+    var route = require(routes_path + '/' + file);
+    app.use('/api', route);
+});
+
+
+/**
+ * Middleware to catch all unmatched routes
+ */
+app.all('*', function (req, res) {
+    res.send(404);
+});
+
+
+module.exports = app;
+
