@@ -1,33 +1,35 @@
 <html ng-app = "myApp">
-    <head>
-        <title>Real time Location sharing with HTML5, Socket.IO, and Node.js</title>
-        <script type="text/javascript" src="javascripts/lib/angular.min.js"></script>
-        <script src="./javascripts/lib/angular-route.min.js"></script>
-        <script src="./javascripts/lib/angular-resource.min.js"></script>
-    </head>
-    <body >
+<head>
+    <title>Real time Location sharing with HTML5, Socket.IO, and Node.js</title>
 
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmXqlPi1nGaMrgChKUjIzHBs7AWrGXJaA&sensor=true"></script>
-        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular.min.js"></script>
+    <script src="./javascripts/lib/angular-route.min.js"></script>
+    <script src="./javascripts/lib/angular-resource.min.js"></script>
+</head>
+<body >
 
-        <script type="text/javascript" src="javascripts/jquery.min.js"></script>
-        <script type="text/javascript" src="javascripts/location-sharing.js"></script>
-        <script type="text/javascript" src="javascripts/mapInteracties.js"></script>
-        <script type="text/javascript" src="javascripts/controllers.js"></script>
-        <script type="text/javascript" src="javascripts/app.js"></script>
-        <!--<script type="text/javascript" src="javascripts/services.js"></script>-->
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmXqlPi1nGaMrgChKUjIzHBs7AWrGXJaA&sensor=true"></script>-->
+<script type="text/javascript" src="javascripts/jquery.min.js"></script>
 
-        <a href="/#/home">Home</a>
-        <a href="/#/game">Game</a>
-        <a href="/#/leaderboard">Leaderboard</a>
-        <a href="/#/myprofile">Mijn profiel</a>
-        <a href="/#/faq">FAQ</a>
-        <a href="/#/searchfriends">Zoek je vrienden</a>
-        <a href="/#/login">Login</a>
-        <div data-ng-view=""></div>
+<!--<script type="text/javascript" src="javascripts/location-sharing.js"></script>-->
+<!--<script type="text/javascript" src="javascripts/mapInteracties.js"></script>-->
+<script type="text/javascript" src="javascripts/controllers.js"></script>
+<script type="text/javascript" src="javascripts/app.js"></script>
+<!--<script type="text/javascript" src="javascripts/services.js"></script>-->
+
+<a href="/#/home">Home</a>
+<a href="/#/game">Game</a>
+<a href="/#/leaderboard">Leaderboard</a>
+<a href="/#/myprofile">Mijn profiel</a>
+<a href="/#/faq">FAQ</a>
+<a href="/#/searchfriends">Zoek je vrienden</a>
+<a href="/#/login">Login</a>
+<div id="map-canvas"></div>
+
+<ng-view></ng-view>
 
 
 
-
-    </body>
+</body>
 </html>

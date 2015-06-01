@@ -1,6 +1,10 @@
 
 //
+var express = require('express');
+
+var user = require("./app/routes/routes");
 var app = require('express')();
+var mongoose = require('mongoose');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 server.listen(6032);
@@ -21,12 +25,16 @@ io.sockets.on('connection', function (socket) {
 // For serving static files inside ./client
 app.use(require('express').static('../client'));
 
-//// For hosing on Heroku
-//io.configure(function () {
-//  io.set("transports", ["xhr-polling"]);
-//  io.set("polling duration", 10);
-//  io.set('log level', 1)
-//});
+// DB connect
+mongoose.connect('mongodb://server3.tezzt.nl/s509560/users');
+
+// Models
+var User = require('./app/models/user');
+
+// Serverside routes
+var userRoutes = express.Router('User');
+
+app.use('/login', userRoutes);
 
 function creatArrayOfCoins(cords){
     var y1, y2, x1, x2, amountOfCoins, i, geocoder, randomCords = [];

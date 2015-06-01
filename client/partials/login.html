@@ -1,3 +1,10 @@
-<div>
+<div ng-controller="loginCtrl">
+    <form name="teacherForm" ng-submit="doeLogin()">
+        Username<br>
+        <input type="text" ng-model="loginInfo.username" required><br>
+        Password<br>
+        <input type="password" ng-model="loginInfo.password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
 
 </div>
