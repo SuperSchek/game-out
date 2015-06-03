@@ -18,14 +18,21 @@ var userController = require('../app/controllers/users.js');
 var groupsController = require('../app/controllers/groups.js');
 
 // User Routes
-router.post('/users', userController.signup);
+router.post('/users/register', userController.signup);
+router.get('/users', userController.retrieveAll);
 router.route('/users/login').post(passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/#/home',
     failureRedirect: '/#/login',
-    failureFlash: false
+    failureFlash: true
 }));
 
 // Groups Routes
 router.post('/groups', groupsController.create);
+router.get('/groups', groupsController.retrieveAll);
+
+// test if logged in
+router.get('/loggedin', function(req, res){
+    res.send(req.isAuthenticated() ? req.user : '0');
+});
 
 module.exports = router;

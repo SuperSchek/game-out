@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
  */
 
 exports.signup = function (req, res) {
-
+    console.log("signup get");
+    console.log(req.body);
     // Init Variables
     var user = new User(req.body);
     var message = null;
@@ -39,9 +40,11 @@ exports.signup = function (req, res) {
     });
 };
 
-exports.signin = function () {
-
-    passport.authenticate('local', { successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: true });
+exports.retrieveAll = function (req, res) {
+    User.find(function (err, users) {
+        if (err) {
+            return res.send(err);
+        }
+        res.json(users);
+    });
 };

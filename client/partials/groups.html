@@ -1,0 +1,8 @@
+<div ng-repeat="group in groupList">
+    groepnaam: {{group.name}}<br>
+    eigenaar:{{group.creator.username}}<br><br>
+    <ul >
+        <li ng-repeat="member in group.users">{{member.username}}</li>
+    </ul>
+</div>
+<a href="/#/groups/create">Maak een nieuwe groep</a>

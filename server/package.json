@@ -1,23 +1,24 @@
 {
   "name": "groep4",
-    "description": "A Socket IO server for a real time location sharing service",
+  "description": "A Socket IO server for a real time location sharing service",
   "version": "0.0.1",
   "private": true,
-    "main": "./server",
+  "main": "./server",
   "dependencies": {
     "body-parser": "^1.10.1",
+    "connect-flash": "latest",
     "cookie-parser": "^1.3.3",
     "express": "^4.12.3",
+    "init": "^0.1.2",
+    "lodash": "^3.9.3",
     "mongoose": "^4.0.0",
-    "init" : "^0.1.2",
-    "socket.io" : "latest",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
-    "connect-flash": "latest"
+    "socket.io": "latest"
   },
-    "engines" :{
-        "node" : "0.10.x"
-    },
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "start": "node bin/www.js"
   }

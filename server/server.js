@@ -97,6 +97,7 @@ var fs = require('fs'),
     route_files,
     passportConfig;
 
+
 /**
  * Load configuration
  * @type {*|string}
@@ -133,7 +134,17 @@ models_files.forEach(function (file) {
 app = express();
 
 /**
- * Express settings
+ * Socket init
+ */
+
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(config.port);
+
+
+/**
+ * Express settin   gs
  */
 app.set('port', process.env.PORT || config.port);
 

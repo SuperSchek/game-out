@@ -16,7 +16,7 @@ var GroupSchema = new Schema({
         required: 'Please fill Group name',
         trim: true
     },
-    users: [{ type: Number, ref: 'User' }],
+    users: [{ type: Schema.ObjectId, ref: 'User' }],
     created: {
         type: Date,
         default: Date.now

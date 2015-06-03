@@ -1,25 +1,20 @@
 <div ng-controller="loginCtrl">
-    <form name="teacherForm" ng-submit="doeLogin()">
-        Username<br>
-        <input type="text" ng-model="loginInfo.username" required><br>
-        Password<br>
-        <input type="password" ng-model="loginInfo.password" required><br><br>
-        <input type="submit" value="Login">
-    </form>
 
     <div class="flash" data-ng-repeat="message in messages">{{message}}</div>
 
-    <form action="/api/users/login" method="post">
+    <form ng-submit="signin()">
         <div>
             <label>Username:</label>
-            <input type="text" name="username"/>
+            <input ng-model="loginInfo.username" type="text" name="username"/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="password" name="password"/>
+            <input ng-model="loginInfo.password" type="password" name="password"/>
         </div>
         <div>
-            <input type="submit" value="Log In"/>
+            <input ng-disabled="regInfo.$invalid" type="submit" value="Log In"/>
         </div>
     </form>
+    geen account?
+   <a href="/#/register">Registreer</a>
 </div>
