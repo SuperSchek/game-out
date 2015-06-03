@@ -19,7 +19,7 @@ function initLocationSharing(location_callback, error_callback){
     // ================================
     // Setup Socket IO
     // ================================
-    var socket = io.connect('server3.tezzt.nl:6032');
+    var socket = io.connect('localhost:6032');
     socket.on('connect', function () {
         socket.on('information', function(information){
             if(information.id != userInfo.id) {

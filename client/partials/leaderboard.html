@@ -1,3 +1,14 @@
 <div>
-
+    <div ng-repeat="user in userList">
+        {{user.username}}
+        {{user.city}}
+    </div>
+    ------------------------groups---------------------------
+    <div ng-repeat="group in groupList">
+      groepnaam: {{group.name}}<br>
+        eigenaar:{{group.creator.username}}<br><br>
+        <ul >
+            <li ng-repeat="member in group.users">{{member.username}}</li>
+        </ul>
+    </div>
 </div>

@@ -1,6 +1,7 @@
-
 /*
+>>>>>>> 5e1f9ccb8f170a1c1b4c5147e49f1f84b6710d2e
 var app = require('express')();
+var mongoose = require('mongoose');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 server.listen(6032);
@@ -21,12 +22,16 @@ io.sockets.on('connection', function (socket) {
 // For serving static files inside ./client
 app.use(require('express').static('../client'));
 
-//// For hosing on Heroku
-//io.configure(function () {
-//  io.set("transports", ["xhr-polling"]);
-//  io.set("polling duration", 10);
-//  io.set('log level', 1)
-//});
+// DB connect
+mongoose.connect('mongodb://server3.tezzt.nl/s509560/users');
+
+// Models
+var User = require('./app/models/user');
+
+// Serverside routes
+var userRoutes = express.Router('User');
+
+app.use('/login', userRoutes);
 
 function creatArrayOfCoins(cords){
     var y1, y2, x1, x2, amountOfCoins, i, geocoder, randomCords = [];
@@ -92,6 +97,7 @@ var fs = require('fs'),
     route_files,
     passportConfig;
 
+
 /**
  * Load configuration
  * @type {*|string}
@@ -128,7 +134,17 @@ models_files.forEach(function (file) {
 app = express();
 
 /**
- * Express settings
+ * Socket init
+ */
+
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(config.port);
+
+
+/**
+ * Express settin   gs
  */
 app.set('port', process.env.PORT || config.port);
 

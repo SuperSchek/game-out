@@ -290,7 +290,7 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function createCoins(bounds){
-    var socket = io.connect('server3.tezzt.nl:6032');
+    var socket = io.connect('locahost:6032');
 
     socket.on("arrayOfCoins", function(arrayOfCoins){
         var i;
@@ -307,4 +307,5 @@ function createCoins(bounds){
 
 
 google.maps.event.addDomListener(window, 'load', mapInitialize);
+
 currentUserInfo = initLocationSharing(userLocationUpdate);

@@ -24,3 +24,16 @@ exports.create = function(req, res) {
         }
     });
 };
+
+exports.retrieveAll = function (req, res) {
+     Group
+         .find()
+         .populate('creator', 'username')
+         .populate('users', 'username')
+         .exec(function (err, groups) {
+            if (err) {
+                return res.send(err);
+            }
+            res.json(groups);
+        });
+};
