@@ -1,26 +1,29 @@
 <div>
     <form class="form-signin" ng-submit="createNewGroup()">
 
-    <h1>Nieuwe groep maken!</h1>
-    <label for="groupname" class="sr-only">Groepsnaam:</label>
-    <input type="text" id="groupname" name="groupname" class="form-control" ng-model="newGroup.name" placeholder="Groepsnaam" required autofocus>
-    <table>
-        <tr>
-            <td>
-                <ul>
-                    <li ng-repeat="user in userList">
-                        <a ng-click="addToArray(user._id)">{{user.username}}</a>
-                    </li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li ng-repeat="user in newGroup" ng-click="removeFromArray(user._id)">{{user.username}}</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
-</form>
+        <h1>Nieuwe groep maken!</h1>
+        <label for="groupname" class="sr-only">Groepsnaam:</label>
+        <input type="text" id="groupname" name="groupname" class="form-control" ng-model="newGroup.name"
+               placeholder="Groepsnaam" required autofocus>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <li ng-repeat="user in userList">
+                            <a ng-click="addToArray(user._id)">{{user.username}}</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li ng-repeat="user in newUserGroup" ng-click="removeFromArray(user._id)">{{user.username}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+        {{error}}
+    </form>
 </div>
+{{newGroup}}
 <!--ng-disabled="regInfo.$invalid"-->

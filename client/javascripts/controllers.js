@@ -87,7 +87,15 @@ myApp.controller('myprofileCtrl', function ($scope, $http){
 });
 
 
-myApp.controller('searchfriendsCtrl', function ($scope){
+myApp.controller('searchfriendsCtrl', function ($scope, $http){
+    $http.get("/api/users")
+        .success(function (data) {
+            console.log(data);
+            $scope.userList = data;
+        })
+        .error(function (errorData, status) {
+            console.log("Cannot get list of users(usercontroller) ", errorData, status);
+        });
 
 });
 
@@ -105,8 +113,17 @@ myApp.controller('groupsCtrl', function($scope, $http){
 
 myApp.controller('createGroupCtrl', function($scope, $http, $location, $routeParams, gameoutService){
     var i, j;
-   $scope.newGroup = [];
+    // Creator moet nog gefixt worden!! Bij creator moet de _id van de huidige gebruiker worden ingevuld
+
+   $scope.newUserGroup = [];
    $scope.userList = null;
+    $scope.error = null;
+    $scope.newGroup = {
+        name: "",
+        users: "",
+        creator: "",
+        teamPoints: 0
+    }
 
     $http.get("/api/users")
         .success(function (data) {
@@ -120,27 +137,45 @@ myApp.controller('createGroupCtrl', function($scope, $http, $location, $routePar
     $scope.addToArray = function (userId) {
         for(i = 0; i < $scope.userList.length; i +=1 ){
             if($scope.userList[i]._id === userId){
-                $scope.newGroup.push($scope.userList[i])
+                $scope.newUserGroup.push($scope.userList[i])
                 $scope.userList.splice([i], 1);
-                console.log($scope.newGroup);
-                console.log($scope.userList);
             }
         }
     };
 
     $scope.removeFromArray = function (userId) {
-        for(j = 0; j < $scope.newGroup.length; j +=1 ){
-            if($scope.newGroup[j]._id === userId){
-                $scope.userList.push($scope.newGroup[j])
-                $scope.newGroup.splice([j], 1);
-                console.log($scope.newGroup);
-                console.log($scope.userList);
+        for(j = 0; j < $scope.newUserGroup.length; j +=1 ){
+            if($scope.newUserGroup[j]._id === userId){
+                $scope.userList.push($scope.newUserGroup[j])
+                $scope.newUserGroup.splice([j], 1);
             }
         }
     };
 
-    $scope.createNewGroup = function (userId) {}
-    
+    $scope.createNewGroup = function () {
+        var z, listOfId = [];
+        if($scope.newUserGroup.length === 0){
+            $scope.error = "Geen leden geselecteerd!";
+        }else{
+        for(z = 0; z < $scope.newUserGroup.length; z += 1){
+            listOfId.push($scope.newUserGroup[z]._id);
+        };
+        $scope.newGroup.users = listOfId;
+        $scope.newGroup.creator = $scope.newUserGroup[0]._id;
+        //console.log($scope.newGroup);
+
+        $http.post("/api/groups", $scope.newGroup)
+            .success(function (replyData) {
+                console.log("gelukt!");
+            })
+            .error(function (errorData, status) {
+                console.log("LOGIN AJAX ERROR", status, errorData);
+            })
+
+
+    }
+    }
+
 
 });
 
@@ -152,7 +187,8 @@ myApp.controller('registerCtrl', function($scope, $http, $window){
         city: "",
         username: "",
         password: "",
-        email: ""
+        email: "",
+        userPoints: 0
     }
 
     $scope.signup = function () {

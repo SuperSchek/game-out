@@ -24,6 +24,9 @@ var GroupSchema = new Schema({
     creator: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    teamPoints: {
+        type: Number
     }
 });
 
