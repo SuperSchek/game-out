@@ -86,6 +86,7 @@ var fs = require('fs'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     expressSession = require('express-session'),
+    expose = require('express-expose'),
     flash = require('connect-flash'),
     env,
     config,
@@ -94,8 +95,7 @@ var fs = require('fs'),
     models_files,
     app,
     routes_path,
-    route_files,
-    passportConfig;
+    route_files;
 
 
 /**
@@ -176,17 +176,16 @@ app.use(express.static(__dirname + '/../client/'));
  * Set up Passport and Session
  */
 
-passportConfig = require('./config/passport');
-passportConfig = passportConfig();
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-
+require('./config/passport')(passport);
 app.use(expressSession({
     saveUninitialized: true,
     resave: true,
     secret: 'gameoutSoSecretB0y!'
 }));
+app = expose(app);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 /**
  * Bootstrap routes

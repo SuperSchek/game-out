@@ -5,6 +5,7 @@
 /** @class */
 var express = require('express'),
     passport = require('passport'),
+    expose = require('express-expose'),
     router = express.Router();
 
 
@@ -20,11 +21,8 @@ var groupsController = require('../app/controllers/groups.js');
 // User Routes
 router.post('/users/register', userController.signup);
 router.get('/users', userController.retrieveAll);
-router.route('/users/login').post(passport.authenticate('local', {
-    successRedirect: '/#/home',
-    failureRedirect: '/#/login',
-    failureFlash: true
-}));
+router.post('/users/login', userController.signin);
+router.get('/users/profile', userController.profile);
 
 // Groups Routes
 router.post('/groups', groupsController.create);
