@@ -1,14 +1,16 @@
 <div>
-    <div ng-repeat="user in userList">
-        {{user.username}}
-        {{user.city}}
+    <div ng-repeat="user in userList | orderBy:'-userPoints'">
+        {{user.username}}-{{user.city}}-{{user.userPoints}}
     </div>
     ------------------------groups---------------------------
-    <div ng-repeat="group in groupList">
+    <div ng-repeat="group in groupList | orderBy:'-teamPoints'">
       groepnaam: {{group.name}}<br>
-        eigenaar:{{group.creator.username}}<br><br>
+        eigenaar:{{group.creator.username}}
         <ul >
             <li ng-repeat="member in group.users">{{member.username}}</li>
         </ul>
+        Punten: {{group.teamPoints}}
+        <br><br><br>
+
     </div>
 </div>

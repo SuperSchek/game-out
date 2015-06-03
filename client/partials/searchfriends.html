@@ -1,3 +1,12 @@
-<div>
 
+<input ng-model="query" placeholder="Type to start searching...">
+
+<div ng-click="bool=true" ng-mouseleave="bool=false" ng-init="bool=false" ng-repeat="user in userList | filter:query">
+    {{user.username}}
+    <div ng-show="bool">
+        Naam: {{user.firstname}} {{user.lastname}}<br>
+        Stad: {{user.city}}<br>
+        Aantal punten: {{user.userPoints}}
+        <br><br>
+    </div>
 </div>
