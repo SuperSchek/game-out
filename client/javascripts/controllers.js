@@ -1,12 +1,6 @@
-
-
-
-
-
-
 var myApp = angular.module('myApp', ['ngRoute', 'myApp.services'])
 
-myApp.controller('homeCtrl', function ($scope){
+myApp.controller('homeCtrl', function ($scope, $rootScope, $routeParams){
     $scope.probeersel = "mus mahl probieren eg  segkjhgid";
 
 });
@@ -22,7 +16,7 @@ myApp.controller('faqCtrl', function ($scope){
 });
 
 
-myApp.controller('leaderboardCtrl', function ($scope, $http){
+myApp.controller('leaderboardCtrl', function ($scope, $http, Auth){
     var arr1 = [];
     var arr2 = [];
     $http.get("/api/users")
@@ -82,8 +76,14 @@ myApp.controller('leaderboardCtrl', function ($scope, $http){
         });
 });
 
-myApp.controller('myprofileCtrl', function ($scope){
-
+myApp.controller('myprofileCtrl', function ($scope, $http){
+    $http.get("/api/users/profile")
+        .success(function (data) {
+            $scope.user = data.user;
+        })
+        .error(function (errorData, status) {
+            console.log("Cannot get list of user(usercontroller) ", errorData, status);
+        });
 });
 
 
