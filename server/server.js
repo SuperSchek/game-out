@@ -162,10 +162,15 @@ app.use(express.static(__dirname + '/../client/'));
 
 passportConfig = require('./config/passport');
 passportConfig = passportConfig();
-app.use(expressSession({secret: 'gameoutSoSecretB0y!'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+app.use(expressSession({
+    saveUninitialized: true,
+    resave: true,
+    secret: 'gameoutSoSecretB0y!'
+}));
 
 /**
  * Bootstrap routes

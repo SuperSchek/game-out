@@ -19,10 +19,8 @@ var groupsController = require('../app/controllers/groups.js');
 
 // User Routes
 router.post('/users', userController.signup);
-router.route('/users/login').post(passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/#/login',
-    failureFlash: false
+router.route('/users/login').post(passport.authenticate('local', function(res, req){
+
 }));
 
 // Groups Routes

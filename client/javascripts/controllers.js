@@ -6,8 +6,10 @@
 
 var myApp = angular.module('myApp', ['ngRoute', 'myApp.services'])
 
-myApp.controller('homeCtrl', function ($scope){
+myApp.controller('homeCtrl', function ($scope, $routeParams){
     $scope.probeersel = "mus mahl probieren eg  segkjhgid";
+
+    $scope.user = $routeParams.user;
 
 });
 
