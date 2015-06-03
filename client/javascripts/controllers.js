@@ -1,8 +1,23 @@
 var myApp = angular.module('myApp', ['ngRoute', 'myApp.services'])
 
-myApp.controller('homeCtrl', function ($scope, $rootScope, $routeParams){
-    $scope.probeersel = "mus mahl probieren eg  segkjhgid";
+myApp.controller('homeCtrl', function ($scope, $http, $rootScope, $routeParams){
+    $http.get("/api/users")
+        .success(function (data) {
+            console.log(data);
+            $scope.userList = data;
+        })
+        .error(function (errorData, status) {
+            console.log("Cannot get list of users(usercontroller) ", errorData, status);
+        });
 
+    $http.get("/api/groups")
+        .success(function (data) {
+            console.log(data);
+            $scope.groupList = data;
+        })
+        .error(function (errorData, status) {
+            console.log("Cannot get list of users(usercontroller) ", errorData, status);
+        });
 });
 
 myApp.controller('gameCtrl', function ($scope){
