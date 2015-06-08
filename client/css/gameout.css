@@ -1,3 +1,18 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@font-face {
+    font-family: 'cartoonist';
+    src: url('../fonts/cartoonist_kooky-webfont.eot');
+    src: url('../fonts/cartoonist_kooky-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/cartoonist_kooky-webfont.woff2') format('woff2'),
+    url('../fonts/cartoonist_kooky-webfont.woff') format('woff'),
+    url('../fonts/cartoonist_kooky-webfont.ttf') format('truetype'),
+    url('../fonts/cartoonist_kooky-webfont.svg#cartoonistkooky') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 html{
     margin:0;
     padding:0;
@@ -7,6 +22,16 @@ body{
     margin:0;
     padding:10px;
     background:#fecc09;
+}
+
+h1, h2{
+    margin:0;
+    padding:0;
+    font-family:'cartoonist';
+}
+
+p{
+    font-family: 'Open Sans', sans-serif;
 }
 
 .hexagon-wrapper {
@@ -22,6 +47,11 @@ body{
     width: calc(100% * 0.57735);
     display: inline-block;
     background:#343434;
+}
+
+.hex-border, .hex-border::after, .hex-border::before{
+    border-top:5px solid #343434;
+    border-bottom:5px solid #343434;
 }
 
 .hexagon:before, .shadow:before {
@@ -44,6 +74,20 @@ body{
     width: inherit;
     content: '';
     transform: rotateZ(-60deg);
+}
+
+.img-big img{
+    position: relative;
+    z-index: 3;
+    max-width: 88px;
+    margin-top: 20px;
+}
+
+.img-small img{
+    position:relative;
+    z-index:3;
+    max-width:40px;
+    margin-top:15px;
 }
 
 .search{
@@ -142,4 +186,192 @@ nav .shadow:after{
 
 nav .hexagon-wrapper:hover .shadow{
     display:none;
+}
+
+.login{
+    width:300px;
+    height:250px;
+    margin:0 auto;
+}
+
+.login label{
+    width:100%;
+    text-align:center;
+    font-size:18px;
+}
+
+.login input{
+    width:100%;
+}
+
+/*
+PROFILE PAGE
+*/
+
+.profile{
+    width:100%;
+    float:left;
+}
+
+.profile-name{
+    width: calc(100% - 150px);
+    height: 70px;
+    background: #343434;
+    float: left;
+    margin: 0px 0px 0px -32px;
+    padding: 0px 0px 0px 40px;
+    border-bottom:76px solid #343434;
+}
+
+.profile-name::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 38px solid transparent;
+    border-bottom: 38px solid transparent;
+    border-left: 25px solid #343434;
+    position: absolute;
+    top:0px;
+    right:22px;
+}
+
+.profile-name h1{
+    color:#ffffff;
+    margin:20px;
+}
+
+.profile-friends{
+    width: calc(100% - 250px);
+    height: 70px;
+    background: grey;
+    float: left;
+    margin: 0px 0px 0px -32px;
+    padding: 0px 0px 0px 40px;
+    border-bottom:74px solid grey;
+}
+
+.profile-friends::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 38px solid transparent;
+    border-bottom: 38px solid transparent;
+    border-left: 25px solid grey;
+    position: absolute;
+    top:74px;
+    right:122px;
+}
+
+.profile-friends h2{
+    color:#ffffff;
+    margin:20px;
+}
+
+/*
+GENERAL LIST
+*/
+
+.list {
+    width:100%;
+    margin:20px 0px 0px 0px;
+    padding:0;
+    list-style-type:none;
+    float:left;
+}
+
+.list li{
+    width:100%;
+    height:70px;
+    float:left;
+}
+
+.list li p, .list li a{
+    width:calc(100% - 70px);
+    float:left;
+    line-height:70px;
+    padding:0px 0px 0px 34px;
+    margin:0px 0px 0px -20px;
+    background:#343434;
+    color:#FFFFFF;
+    font-size:18px;
+}
+
+.list li::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    border-left: 25px solid #343434;
+    position: absolute;
+}
+
+
+.list-groups li::after{
+    border-left: 25px solid grey;
+}
+
+.list-groups li p, .list-groups li a{
+    width:calc(70% - 70px);
+}
+
+.list li a:hover, .list-groups li a:hover{
+    text-decoration:none;
+}
+
+.list-groups li strong{
+    width:30%;
+    float:left;
+    line-height:55px;
+    background:grey;
+    color:#FFFFFF;
+    font-size:18px;
+    padding:10px 0px 0px 30px;
+    font-family:'cartoonist';
+}
+
+.list-groups li strong span{
+    font-size:35px;
+}
+
+.list-groups li strong::before{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    border-left: 25px solid #343434;
+    position: absolute;
+    margin:-10px 0px 0px -30px;
+}
+
+.title{
+    background:#343434;
+    color:#ffffff;
+    text-align:center;
+    padding:15px 0px;
+}
+
+.title::before{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 34px solid transparent;
+    border-bottom: 34px solid transparent;
+    border-right: 15px solid #343434;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.title::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 34px solid transparent;
+    border-bottom: 34px solid transparent;
+    border-left: 15px solid #343434;
+    position: absolute;
+    right: 0;
+    top: 0;
 }

@@ -54,6 +54,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/groups/create.html',
             controller: 'createGroupCtrl'
         });
+        $routeProvider.when('/groups/:_id', {
+            templateUrl: 'partials/groups/detail.html',
+            controller: 'detailGroupCtrl'
+        });
         $routeProvider.when('/register', {
             templateUrl: 'partials/register.html',
             controller: 'registerCtrl'

@@ -14,6 +14,13 @@
     <script src="./javascripts/lib/angular-resource.min.js"></script>
 </head>
 <body >
+
+<div id="map-canvas"></div>
+
+<ng-view></ng-view>
+
+<br/>
+
 <a href="/#/home">Home</a>
 <a href="/#/game">Game</a>
 <a href="/#/leaderboard">Leaderboard</a>
@@ -23,10 +30,6 @@
 <a href="/#/login">Login</a>
 <a href="/#/register">Registreer</a>
 <a href="/#/groups">Groepen</a>
-
-<div id="map-canvas"></div>
-
-<ng-view></ng-view>
 
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmXqlPi1nGaMrgChKUjIzHBs7AWrGXJaA&sensor=true"></script>-->

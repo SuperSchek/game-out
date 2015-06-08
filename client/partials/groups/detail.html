@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                <div class="hexagon img-small" style="background:#343434;">
+                    <a href="/#/groups">
+                        <img src="/img/back.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="profile">
+                <div class="hexagon-wrapper" style="width:150px;height:150px;">
+                    <div class="hexagon hex-border img-big" style="background:#f7a100;">
+                        <img src="/img/rasta.png">
+                    </div>
+                </div>
+
+                <div class="profile-name">
+                    <h1>{{ group.name }}</h1>
+                </div>
+
+                <div class="profile-friends">
+                    <h2>{{ group.usercount}} leden</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <ul class="list">
+                <li ng-repeat="user in group.users[0]">
+                    <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                        <div class="hexagon img-small" style="background:#5a4980;">
+                            <img src="/img/birthday.png">
+                        </div>
+                    </div>
+                    <p>{{ user.username }}</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-6">
+            <ul class="list">
+                <li ng-repeat="user in group.users[1]">
+                    <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                        <div class="hexagon img-small" style="background:#5a4980;">
+                            <img src="/img/birthday.png">
+                        </div>
+                    </div>
+                    <p>{{ user.username }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
