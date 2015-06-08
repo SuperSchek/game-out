@@ -31,16 +31,20 @@
                         <img src="/img/birthday.png" >
                     </div>
                 </div>
-                <p>11 jaar</p>
+                <p >11 jaar</p>
             </li>
-            <li>
+            <li ng-model="show">
                 <div class="hexagon-wrapper" style="width:70px;height:70px;">
                     <div class="hexagon img-small" style="background:#b6332b;">
                         <img src="/img/world.png" >
                     </div>
                 </div>
-                <p>{{ user.city }}</p>
-            </li>
+                <p ng-click="show=!show" id="theCity" ng-hide="show">{{ user.city }}</p>
+                <p>
+                   <input  id="adjustCity" class="changeUserDataInput" ng-show="show"  type="text" ng-model="user.city">
+                   <button id="saveCity" ng-click="show=!show; updateAccount()" ng-show="show" >Opslaan</button>
+                </p>
+               </li>
             <li>
                 <div class="hexagon-wrapper" style="width:70px;height:70px;">
                     <div class="hexagon img-small" style="background:#f7a100;">
@@ -48,6 +52,15 @@
                     </div>
                 </div>
                 <p>Vriendenlijst</p>
+            </li>
+
+            <li>
+                <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                    <div class="hexagon img-small" style="background:#f7a100;">
+                        <img src="/img/twopeople.png" >
+                    </div>
+                </div>
+                <p id="deleteAccount" ng-click="deleteAccount(user._id)">Verwijder account</p>
             </li>
         </ul>
     </div>

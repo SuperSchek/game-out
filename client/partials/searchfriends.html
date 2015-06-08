@@ -2,11 +2,11 @@
 <input ng-model="query" placeholder="Type to start searching...">
 
 <div ng-click="bool=true" ng-mouseleave="bool=false" ng-init="bool=false" ng-repeat="user in userList | filter:query">
-    {{user.username}}
+   <h4>{{user.username}}</h4>
     <div ng-show="bool">
-        Naam: {{user.firstname}} {{user.lastname}}<br>
-        Stad: {{user.city}}<br>
-        Aantal punten: {{user.userPoints}}
+       <h4 id="name"> Naam: {{user.firstname}} {{user.lastname}}</h4><br>
+        <h4 id="city">Stad: {{user.city}}</h4> <br>
+        <h4 id="points"> Aantal punten: {{user.userPoints}}</h4>
         <br><br>
     </div>
 </div>

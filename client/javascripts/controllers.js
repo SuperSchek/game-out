@@ -92,13 +92,49 @@ myApp.controller('leaderboardCtrl', function ($scope, $http, Auth){
 });
 
 myApp.controller('myprofileCtrl', function ($scope, $http){
+    $scope.user = null;
     $http.get("/api/users/profile")
         .success(function (data) {
             $scope.user = data.user;
+            console.log(data.user);
         })
         .error(function (errorData, status) {
             console.log("Cannot get list of user(usercontroller) ", errorData, status);
         });
+    $scope.deleteAccount = function (id) {
+
+        //var r = confirm("Weet je zeker dat je je account wilt verwijderen?");
+        //if (r == true) {
+            console.log("deleting account");
+            $http.delete("/api/users/delete/" + id)
+                .success(function (data) {
+                    console.log(data)
+                    console.log('deleted');
+
+                })
+                .error(function (errorData, status) {
+                    console.log("error deleting account ", errorData, status);
+                });
+        //} else {
+        //    console.log("Not deleted")
+        //}
+
+    };
+
+    $scope.updateAccount = function () {
+        console.log("update account");
+        console.log($scope.user);
+
+        $http.put("/api/users/"+ $scope.user._id, $scope.user)
+            .success(function (data) {
+                console.log("update succesfull")
+                console.log(data);
+            })
+            .error(function (errorData, status) {
+                console.log("update failed", errorData, status);
+            });
+    };
+
 });
 
 
@@ -111,8 +147,7 @@ myApp.controller('searchfriendsCtrl', function ($scope, $http){
         .error(function (errorData, status) {
             console.log("Cannot get list of users(usercontroller) ", errorData, status);
         });
-
-});
+    });
 
 myApp.controller('groupsCtrl', function($scope, $http){
     $http.get("/api/groups")
