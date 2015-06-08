@@ -75,6 +75,7 @@ exports.retrieveAll = function (req, res) {
     });
 };
 
+
 exports.retrieve = function (req, res) {
     User
         .findOne({_id: req.params._id}, {})
@@ -117,6 +118,63 @@ exports.addFriend = function (req, res) {
         };
         return res.send(retObj);
     };
+
+    User
+        .findByIdAndUpdate(conditions, update, options, callback);
+};
+
+exports.deleteOne = function (req, res) {
+    var conditions, callback;
+
+    conditions = {
+        _id: req.params._id
+    };
+    callback = function (err, doc) {
+        var retObj = {
+            meta: {
+                "action": "delete",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+        return res.send(retObj);
+    };
+    User
+        .remove(conditions, callback);
+};
+
+exports.updateOne = function (req, res) {
+    var conditions, update, options, callback;
+    conditions = {
+        _id: req.params._id
+    };
+    update = {
+        username: req.body.username || "",
+        city: req.body.city || ""
+    };
+    options = {
+        multi: false
+    };
+
+    callback = function (err, doc) {
+
+        var retObj = {
+
+            meta: {
+                "action": "update",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+
+            doc: doc,
+
+            err: err
+        };
+        return res.send(retObj);
+    };
+
 
     User
         .findByIdAndUpdate(conditions, update, options, callback);

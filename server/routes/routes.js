@@ -18,13 +18,19 @@ var express = require('express'),
 var userController = require('../app/controllers/users.js');
 var groupsController = require('../app/controllers/groups.js');
 
-// User Routes
+// User post Routes
 router.post('/users/register', userController.signup);
-router.get('/users', userController.retrieveAll);
 router.post('/users/login', userController.signin);
+// User get Routes
+router.get('/users', userController.retrieveAll);
 router.get('/users/profile', userController.profile);
+
 router.get('/users/:_id', userController.retrieve);
 router.put('/users/addfriend', userController.addFriend);
+// User delete Routes
+router.delete('/users/delete/:_id', userController.deleteOne);
+// User update Routes
+router.put('/users/:_id', userController.updateOne);
 
 // Groups Routes
 router.post('/groups', groupsController.create);
