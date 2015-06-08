@@ -77,9 +77,9 @@ describe('API Routing on books CRUD', function(){
 
 
     describe('DELETE', function(){
-        it('DELETE /users/{id}', function(done){
+        it('DELETE /users/delete/{id}', function(done){
             request
-                .del('/books/' + tmpUserId)
+                .del('/users/delete/' + tmpUserId)
                 .expect(200)
                 .end(function(err, res){
                     if(err){

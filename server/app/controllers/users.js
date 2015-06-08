@@ -139,7 +139,7 @@ exports.deleteOne = function (req, res) {
             doc: doc,
             err: err
         };
-        return res.send(retObj);
+        return res.status(200).send(retObj);
     };
     User
         .remove(conditions, callback);
