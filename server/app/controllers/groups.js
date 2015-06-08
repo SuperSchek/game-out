@@ -37,3 +37,16 @@ exports.retrieveAll = function (req, res) {
             res.json(groups);
         });
 };
+
+exports.retrieve = function(req, res){
+    Group
+        .findOne({_id: req.params._id}, {})
+        .populate('creator', 'username')
+        .populate('users', 'username')
+        .exec(function(err, group){
+           if(err){
+               return res.send(err);
+           }
+           res.json(group);
+        });
+};

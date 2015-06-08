@@ -126,6 +126,19 @@ myApp.controller('groupsCtrl', function($scope, $http){
 
 });
 
+myApp.controller('detailGroupCtrl', function($scope, $http, $routeParams){
+    $http.get('/api/groups/' + $routeParams._id)
+        .success(function(data){
+            var users = {}, split;
+            data.usercount = data.users.length;
+            split = Math.round(data.users.length / 2);
+            users[0] = data.users.slice(0, split);
+            users[1] = data.users.slice(split, data.users.length);
+            data.users = users;
+            $scope.group = data;
+        });
+});
+
 myApp.controller('createGroupCtrl', function($scope, $http, $location, $routeParams, gameoutService){
     var i, j;
     // Creator moet nog gefixt worden!! Bij creator moet de _id van de huidige gebruiker worden ingevuld

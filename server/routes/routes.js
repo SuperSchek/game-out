@@ -27,6 +27,7 @@ router.get('/users/profile', userController.profile);
 // Groups Routes
 router.post('/groups', groupsController.create);
 router.get('/groups', groupsController.retrieveAll);
+router.get('/groups/:_id', groupsController.retrieve);
 
 // test if logged in
 router.get('/loggedin', function(req, res){

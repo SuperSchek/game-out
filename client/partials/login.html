@@ -1,14 +1,14 @@
-<div ng-controller="loginCtrl">
+<div ng-controller="loginCtrl" class="login">
 
     <div class="flash" data-ng-repeat="message in messages">{{message}}</div>
 
     <form ng-submit="signin()">
         <div>
-            <label>Username:</label>
+            <label>Gebruikersnaam:</label>
             <input ng-model="loginInfo.username" type="text" name="username"/>
         </div>
         <div>
-            <label>Password:</label>
+            <label>Wachtwoord:</label>
             <input ng-model="loginInfo.password" type="password" name="password"/>
         </div>
         <div>
@@ -16,9 +16,5 @@
         </div>
     </form>
 
-
-    {{ user }}
-
-    geen account?
-   <a href="/#/register">Registreer</a>
+    Geen account? <a href="/#/register">Registreer</a>
 </div>
