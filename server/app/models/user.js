@@ -8,17 +8,10 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 /**
- * A Validation function for local strategy properties
- */
-var validateLocalStrategyProperty = function(property) {
-    return ((this.provider !== 'local' && !this.updated) || property.length);
-};
-
-/**
  * A Validation function for local strategy password
  */
-var validateLocalStrategyPassword = function(password) {
-    return (this.provider !== 'local' || (password && password.length > 6));
+var validatePasswordLength = function (password) {
+    return (password && password.length > 6);
 };
 
 /**
@@ -29,13 +22,13 @@ var UserSchema = new Schema({
         type: String,
         trim: true,
         default: '',
-        validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+        required: 'Vul alsjeblieft je voornaam in'
     },
     lastname: {
         type: String,
         trim: true,
         default: '',
-      //  validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+        required: 'Vul alsjeblieft je achternaam in'
     },
     city: {
         type: String,
@@ -45,35 +38,19 @@ var UserSchema = new Schema({
         type: String,
         trim: true,
         default: '',
-        validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+        required: 'Vul alsjeblieft je email in',
         match: [/.+\@.+\..+/, 'Please fill a valid email address']
     },
     username: {
         type: String,
-        unique: 'testing error message',
+        unique: 'De gebruikersnaam moet uniek zijn',
         required: 'Please fill in a username',
         trim: true
     },
     password: {
         type: String,
         default: '',
-        validate: [validateLocalStrategyPassword, 'Password should be longer']
-    },
-    salt: {
-        type: String
-    },
-    provider: {
-        type: String,
-        required: 'Provider is required'
-    },
-    providerData: {},
-    additionalProvidersData: {},
-    roles: {
-        type: [{
-            type: String,
-            enum: ['user', 'admin']
-        }],
-        default: ['user']
+        validate: [validatePasswordLength, 'Password should be longer']
     },
     updated: {
         type: Date
@@ -82,16 +59,13 @@ var UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    /* For reset password */
-    resetPasswordToken: {
-        type: String
-    },
-    resetPasswordExpires: {
-        type: Date
-    },
     userPoints: {
         type: Number
-    }
+    },
+    friends: [
+        { type: Schema.ObjectId, ref: 'User' }
+    ]
+
 
 });
 
@@ -100,7 +74,7 @@ var UserSchema = new Schema({
  */
 
 UserSchema.pre('save',
-    function(next) {
+    function (next) {
         if (this.password) {
             var md5 = crypto.createHash('md5');
             this.password = md5.update(this.password).digest('hex');
@@ -110,7 +84,7 @@ UserSchema.pre('save',
     }
 );
 
-UserSchema.methods.authenticate = function(password) {
+UserSchema.methods.authenticate = function (password) {
     var md5 = crypto.createHash('md5');
     md5 = md5.update(password).digest('hex');
 

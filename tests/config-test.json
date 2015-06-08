@@ -1,4 +1,4 @@
 {
   "host": "localhost",
-  "api_path": "api"
+  "api_path": "/api"
 }
