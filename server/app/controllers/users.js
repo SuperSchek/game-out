@@ -37,6 +37,16 @@ exports.signup = function (req, res) {
                 }
             });
         }
+        var retObj = {
+            meta: {
+                "action": "create",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+        return res.send(retObj);
     });
 };
 
@@ -122,7 +132,7 @@ exports.updateOne = function (req, res) {
             },
             doc: doc, //only the first document, not an array
             err: err
-        };
+        };clipboardDatano
         return res.send(retObj);
     };
     User.findOneAndUpdate(conditions, update, options, callback);
