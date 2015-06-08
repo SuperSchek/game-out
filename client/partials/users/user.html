@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <div class="hexagon-wrapper" style="width:70px;height:70px;">
             <div class="hexagon img-small" style="background:#343434;">
                 <a href="/#/home">
@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-8">
         <div class="profile">
             <div class="hexagon-wrapper" style="width:150px;height:150px;">
                 <div class="hexagon hex-border img-big" style="background:#f7a100;">
@@ -31,20 +31,16 @@
                         <img src="/img/birthday.png" >
                     </div>
                 </div>
-                <p >11 jaar</p>
+                <p>11 jaar</p>
             </li>
-            <li ng-model="show">
+            <li>
                 <div class="hexagon-wrapper" style="width:70px;height:70px;">
                     <div class="hexagon img-small" style="background:#b6332b;">
                         <img src="/img/world.png" >
                     </div>
                 </div>
-                <p ng-click="show=!show" id="theCity" ng-hide="show">{{ user.city }}</p>
-                <p>
-                   <input  id="adjustCity" class="changeUserDataInput" ng-show="show"  type="text" ng-model="user.city">
-                   <button id="saveCity" ng-click="show=!show; updateAccount()" ng-show="show" >Opslaan</button>
-                </p>
-               </li>
+                <p>{{ user.city }}</p>
+            </li>
             <li>
                 <div class="hexagon-wrapper" style="width:70px;height:70px;">
                     <div class="hexagon img-small" style="background:#f7a100;">
@@ -53,15 +49,15 @@
                 </div>
                 <p>Vriendenlijst</p>
             </li>
-
-            <li>
-                <div class="hexagon-wrapper" style="width:70px;height:70px;">
-                    <div class="hexagon img-small" style="background:#f7a100;">
-                        <img src="/img/twopeople.png" >
-                    </div>
-                </div>
-                <p id="deleteAccount" ng-click="deleteAccount(user._id)">Verwijder account</p>
-            </li>
         </ul>
+    </div>
+    <div class="col-xs-2">
+        <div class="hexagon-wrapper" style="width:70px;height:70px;">
+            <div class="hexagon img-small" style="background:#343434;">
+                <a ng-click="addFriend()">
+                    <img src="" alt="Add friend">
+                </a>
+            </div>
+        </div>
     </div>
 </div>

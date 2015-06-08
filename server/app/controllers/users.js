@@ -15,9 +15,6 @@ exports.signup = function (req, res) {
     var user = new User(req.body);
     var message = null;
 
-    // Add missing user fields
-    user.provider = 'local';
-
     // Then save the user
     user.save(function (err) {
         if (err) {
@@ -33,7 +30,7 @@ exports.signup = function (req, res) {
                 if (err) {
                     res.status(400).send(err);
                 } else {
-                    res.json(user);
+                    res.status(200).json(user);
                 }
             });
         }
@@ -72,9 +69,9 @@ exports.signin = function (req, res, next) {
 };
 
 exports.profile = function (req, res) {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         res.send({user: req.user});
-    }else{
+    } else {
         res.redirect('/#/login');
     }
 };
@@ -86,6 +83,54 @@ exports.retrieveAll = function (req, res) {
         }
         res.json(users);
     });
+};
+
+
+exports.retrieve = function (req, res) {
+    User
+        .findOne({_id: req.params._id}, {})
+        .populate('friends', 'username')
+        .exec(function (err, group) {
+            if (err) {
+                return res.send(err);
+            }
+            res.json(group);
+        });
+};
+
+exports.addFriend = function (req, res) {
+    var conditions, update, options, callback, retObj, friends;
+
+    friends = req.user.friends;
+    console.log(req.body);
+    friends.push(req.body._id);
+
+    conditions = {
+        _id: req.user._id
+    };
+
+    update = {
+        friends: friends || ''
+    };
+    options = {
+        multi: false
+    };
+
+    callback = function (err, doc) {
+        retObj = {
+            meta: {
+                "action": "update",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+        return res.send(retObj);
+    };
+
+    User
+        .findByIdAndUpdate(conditions, update, options, callback);
 };
 
 exports.deleteOne = function (req, res) {
@@ -104,7 +149,7 @@ exports.deleteOne = function (req, res) {
             doc: doc,
             err: err
         };
-        return res.send(retObj);
+        return res.status(200).send(retObj);
     };
     User
         .remove(conditions, callback);
@@ -124,16 +169,23 @@ exports.updateOne = function (req, res) {
     };
 
     callback = function (err, doc) {
+
         var retObj = {
+
             meta: {
                 "action": "update",
                 'timestamp': new Date(),
                 filename: __filename
             },
-            doc: doc, //only the first document, not an array
+
+            doc: doc,
+
             err: err
         };clipboardDatano
         return res.send(retObj);
     };
-    User.findOneAndUpdate(conditions, update, options, callback);
+
+
+    User
+        .findByIdAndUpdate(conditions, update, options, callback);
 };
