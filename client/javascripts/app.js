@@ -62,6 +62,11 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/register.html',
             controller: 'registerCtrl'
         });
+        //users
+        $routeProvider.when('/users/:_id', {
+            templateUrl: 'partials/users/user.html',
+            controller: 'detailUserCtrl'
+        });
         // When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/login"

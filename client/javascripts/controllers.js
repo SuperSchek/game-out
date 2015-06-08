@@ -252,6 +252,22 @@ myApp.controller('loginCtrl', function($scope, $http, $window){
 
 });
 
+myApp.controller('detailUserCtrl', function($scope, $http, $routeParams){
+    $http.get('/api/users/' + $routeParams._id)
+        .success(function(data){
+            $scope.user = data;
+        });
+
+    $scope.addFriend = function(){
+        console.log($routeParams);
+        $http.put('/api/users/addfriend', {_id: $routeParams._id})
+            .success(function(data){
+            })
+            .error(function(errorData, status){
+            });
+    };
+});
+
 
 
 

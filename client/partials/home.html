@@ -12,7 +12,7 @@
                         <input ng-model="query" placeholder="Zoek een groep of gebruiker" type="text">
                         <div class="searchresults">
                             <ul ng-show="query.length > 1">
-                                <li ng-repeat="user in userList | filter:query">{{user.username}}</li>
+                                <li ng-repeat="user in userList | filter:query"><a href="/#/users/{{user._id}}">{{user.username}}</a></li>
                                 <li ng-repeat="group in groupList | filter:query">{{group.name}}</li>
                             </ul>
                         </div>
