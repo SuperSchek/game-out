@@ -1,3 +1,5 @@
+/*jslint node:true */
+
 'use strict';
 
 var mongoose = require('mongoose'),
@@ -13,7 +15,6 @@ exports.signup = function (req, res) {
     console.log(req.body);
     // Init Variables
     var user = new User(req.body);
-    var message = null;
 
     // Then save the user
     user.save(function (err) {
@@ -21,19 +22,18 @@ exports.signup = function (req, res) {
             return res.status(400).send({
                 message: err
             });
-        } else {
-            // Remove sensitive data before login
-            user.password = undefined;
-            user.salt = undefined;
-
-            req.login(user, function (err) {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    res.status(200).json(user);
-                }
-            });
         }
+        // Remove sensitive data before login
+        user.password = undefined;
+        user.salt = undefined;
+
+        req.login(user, function (err) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                res.status(200).json(user);
+            }
+        });
     });
 };
 
@@ -60,7 +60,9 @@ exports.signin = function (req, res, next) {
 
 exports.profile = function (req, res) {
     if (req.isAuthenticated()) {
-        res.send({user: req.user});
+        res.send({
+            user: req.user
+        });
     } else {
         res.redirect('/#/login');
     }
@@ -78,7 +80,9 @@ exports.retrieveAll = function (req, res) {
 
 exports.retrieve = function (req, res) {
     User
-        .findOne({_id: req.params._id}, {})
+        .findOne({
+            _id: req.params._id
+        }, {})
         .populate('friends', 'username')
         .exec(function (err, group) {
             if (err) {
