@@ -1,3 +1,4 @@
+/*jslint node:true */
 /*
 >>>>>>> 5e1f9ccb8f170a1c1b4c5147e49f1f84b6710d2e
 var app = require('express')();
@@ -71,8 +72,6 @@ function creatArrayOfCoins(cords){
 
 
 }; */
-
-/*jslint node:true */
 "use strict";
 /** TODO: Test with static-analyzer: define module */
 
