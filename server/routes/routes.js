@@ -36,6 +36,8 @@ router.put('/users/:_id', userController.updateOne);
 router.post('/groups', groupsController.create);
 router.get('/groups', groupsController.retrieveAll);
 router.get('/groups/:_id', groupsController.retrieve);
+router.delete('/groups/:_id', groupsController.delete);
+
 
 // test if logged in
 router.get('/loggedin', function (req, res) {

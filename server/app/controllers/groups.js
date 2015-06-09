@@ -21,7 +21,8 @@ exports.create = function (req, res) {
             });
         }
         return res.status(200).send({
-            message: 'Group created succesfully!'
+            message: 'Group created succesfully!',
+            group: group
         });
     });
 };
@@ -52,4 +53,27 @@ exports.retrieve = function (req, res) {
             }
             res.json(group);
         });
+};
+
+exports.delete = function (req, res) {
+
+    var conditions, callback;
+
+    conditions = {
+        _id: req.params._id
+    };
+    callback = function (err, doc) {
+        var retObj = {
+            meta: {
+                "action": "delete",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+        return res.status(200).send(retObj);
+    };
+    Group
+        .remove(conditions, callback);
 };
