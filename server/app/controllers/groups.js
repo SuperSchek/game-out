@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 
     var group = new Group(req.body);
-
+        group.creator = req.user._id;
     // Then save the group
     group.save(function(err) {
         if (err) {
