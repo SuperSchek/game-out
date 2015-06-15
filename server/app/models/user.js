@@ -1,3 +1,5 @@
+/*jslint node:true */
+
 'use strict';
 
 /**
@@ -63,7 +65,7 @@ var UserSchema = new Schema({
         type: Number
     },
     friends: [
-        { type: Schema.ObjectId, ref: 'User' }
+        {type: Schema.ObjectId, ref: 'User'}
     ]
 
 
@@ -82,7 +84,7 @@ UserSchema.pre('save',
 
         next();
     }
-);
+    );
 
 UserSchema.methods.authenticate = function (password) {
     var md5 = crypto.createHash('md5');
