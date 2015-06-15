@@ -45,6 +45,11 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/searchfriends.html',
             controller: 'searchfriendsCtrl'
         });
+        //friendlist
+        $routeProvider.when('/friendlist', {
+            templateUrl: 'partials/friendlist.html',
+            controller: 'friendlistCtrl'
+        });
         //groups
         $routeProvider.when('/groups', {
             templateUrl: 'partials/groups.html',

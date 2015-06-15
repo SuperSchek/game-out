@@ -38,13 +38,6 @@ input.changeUserDataInput{
     background:#343434;
 }
 
-.hexagon-wrapper {
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    float: left;
-    z-index: 1;
-}
 
 .hexagon, .shadow {
     height: 100%;
@@ -158,12 +151,12 @@ input.changeUserDataInput{
 
 nav{
     width:100%;
-    margin:30px 0px 0px 0px;
+    margin:60px 0px 0px 0px;
     float:left;
 }
 
 nav .hexagon-wrapper:nth-child(even){
-    margin: 50px 0px 0px 0px;
+    margin-top: 67px;
 }
 
 nav .shadow{
@@ -326,7 +319,7 @@ GENERAL LIST
 .list-groups li strong{
     width:30%;
     float:left;
-    line-height:55px;
+    line-height:60px;
     background:grey;
     color:#FFFFFF;
     font-size:18px;
@@ -356,6 +349,10 @@ GENERAL LIST
     padding:15px 0px;
 }
 
+.titleactive{
+    background:#1693db !important;
+}
+
 .title::before{
     content: "";
     width: 0;
@@ -368,7 +365,15 @@ GENERAL LIST
     top: 0;
 }
 
-.title::after{
+.titleactive::before{
+    border-right: 15px solid #1693db !important;
+}
+
+.titleactive::after{
+    border-left: 15px solid #1693db !important;
+}
+
+.title::after {
     content: "";
     width: 0;
     height: 0;
@@ -378,4 +383,49 @@ GENERAL LIST
     position: absolute;
     right: 0;
     top: 0;
+}
+.hexagon-wrapper {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    float: left;
+    z-index: 1;
+    margin-left: -16px;
+}
+
+.hexagonhome {
+    position: relative;
+    width: 130px;
+    height: 75.06px;
+    background-color: #64C7CC;
+    margin: 37.53px 0;
+    border-left: solid 5px #333333;
+    border-right: solid 5px #333333;
+    transform: rotate(-30deg);
+}
+
+.hexagonhome:before,
+.hexagonhome:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 91.92px;
+    height: 91.92px;
+    -webkit-transform: scaleY(0.5774) rotate(-45deg);
+    -ms-transform: scaleY(0.5774) rotate(-45deg);
+    transform: scaleY(0.5774) rotate(-45deg);
+    background-color: inherit;
+    left: 14.0381px;
+}
+
+.hexagonhome:before {
+    top: -45.9619px;
+    border-top: solid 7.0711px #333333;
+    border-right: solid 7.0711px #333333;
+}
+
+.hexagonhome:after {
+    bottom: -45.9619px;
+    border-bottom: solid 7.0711px #333333;
+    border-left: solid 7.0711px #333333;
 }

@@ -5,14 +5,16 @@
                 <div class="search">
                     <div class="hexagon-wrapper" style="width:70px;height:70px;">
                         <div class="hexagon img-small">
-                            <img src="/img/search.png" >
+                            <img src="/img/search.png">
                         </div>
                     </div>
                     <div class="searchbar">
                         <input ng-model="query" placeholder="Zoek een groep of gebruiker" type="text">
+
                         <div class="searchresults">
                             <ul ng-show="query.length > 1">
-                                <li ng-repeat="user in userList | filter:query"><a href="/#/users/{{user._id}}">{{user.username}}</a></li>
+                                <li ng-repeat="user in userList | filter:query"><a href="/#/users/{{user._id}}">{{user.username}}</a>
+                                </li>
                                 <li ng-repeat="group in groupList | filter:query">{{group.name}}</li>
                             </ul>
                         </div>
@@ -34,27 +36,26 @@
     <div class="row">
         <div class="col-xs-12">
             <nav>
-                <div class="hexagon-wrapper" style="width:110px;height:110px;">
-                    <a href="/#/groups">
-                        <div class="hexagon hex-border" style="background:#1793db;">Groepen</div>
-                    </a>
-                </div>
+                <a href="/#/groups" class="hexagon-wrapper">
+                    <div class="hexagonhome " style="background:#1793db;">Groepen</div>
+                </a>
 
-                <div class="hexagon-wrapper" style="width:110px;height:110px;">
-                    <div class="hexagon hex-border" style="background:#1793db;">Vrienden</div>
-                </div>
+                <a href="/#/friendlist" class="hexagon-wrapper">
+                    <div class="hexagonhome " style="background:#1793db;">Vrienden</div>
+                </a>
 
-                <div class="hexagon-wrapper" style="width:110px;height:110px;">
-                    <div class="hexagon hex-border" style="background:#0db32d;">Start</div>
-                </div>
+                <a href="" class="hexagon-wrapper">
+                    <div class="hexagonhome " style="background:#0db32d;">Start</div>
+                </a>
 
-                <div class="hexagon-wrapper" style="width:110px;height:110px;">
-                    <div class="hexagon hex-border" style="background:#1793db;">?</div>
-                </div>
+                <a href="/#/leaderboard" class="hexagon-wrapper">
+                    <div class="hexagonhome " style="background:#1793db;">?</div>
+                </a>
 
-                <div class="hexagon-wrapper" style="width:110px;height:110px;">
-                    <div class="hexagon hex-border" style="background:#1793db;">Statistieken</div>
-                </div>
+                <a href="" class="hexagon-wrapper">
+                    <div class="hexagonhome " style="background:#1793db;">Statistieken</div>
+                </a>
+
             </nav>
         </div>
     </div>

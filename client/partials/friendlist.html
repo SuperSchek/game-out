@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                <div class="hexagon img-small" style="background:#343434;">
+                    <a href="/#/home"><img src="/img/back.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <h1 class="title">MIJN VRIENDEN</h1>
+        </div>
+        <div class="col-xs-2">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <ul class="list list-groups">
+                <li ng-repeat="group in groupList">
+                    <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                        <div class="hexagon img-small" style="background:#5a4980;">
+                            <img src="/img/birthday.png" >
+                        </div>
+                    </div>
+                    <a href="/#/groups/{{group._id}}">{{group.name}}</a>
+                    <strong><span>{{group.users.length}}</span> leden</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
