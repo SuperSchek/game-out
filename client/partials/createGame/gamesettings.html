@@ -1,0 +1,94 @@
+<div class="container-fluid" ng-model="show">
+        <!--Speltype selecteren-->
+    <div ng-hide="show">
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                    <div class="hexagon img-small" style="background:#343434;">
+                        <a href="/#/home"><img src="/img/back.png"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <h1 class="title">KIES EEN SPELTYPE</h1>
+            </div>
+            <div class="col-xs-2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <nav>
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">Conquest</div>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">Capture the Flag</div>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <a href="" ng-click="setGameType('muntenmadness'); show=!show">
+                            <div class="hexagon hex-border" style="background:#1793db;">Munten Madness</div>
+                        </a>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">Team battle</div>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">Free for All</div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--Game settings-->
+    <div ng-show="show">
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="hexagon-wrapper" style="width:70px;height:70px;">
+                    <div class="hexagon img-small" style="background:#343434;">
+                        <a href="/#/home"><img src="/img/back.png"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <h1 class="title">STEL DE REGELS IN</h1>
+            </div>
+            <div class="col-xs-2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <nav>
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;" ng-model="FFO">
+
+                        <div class="hexagon hex-border" style="background:#1793db;"></div>
+                        <!--<div class="hexagon hex-border" style="background:#1793db;"></div>-->
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">{{settings.coinLimit}}</div>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <a href="">
+                            <div class="hexagon hex-border" style="background:#1793db;">Speelveld</div>
+                        </a>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">{{settings.timeLimit}}</div>
+                    </div>
+
+                    <div class="hexagon-wrapper" style="width:110px;height:110px;">
+                        <div class="hexagon hex-border" style="background:#1793db;">Free for All</div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</div>
+{{settings}}

@@ -72,6 +72,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/users/user.html',
             controller: 'detailUserCtrl'
         });
+        $routeProvider.when('/gamesettings', {
+            templateUrl: 'partials/createGame/gamesettings.html',
+            controller: 'createGameCtrl'
+        });
         // When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/login"

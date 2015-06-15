@@ -29,6 +29,9 @@ myApp.controller('gameCtrl', function ($scope) {
     $scope.iets = "halloooooo";
 
 });
+myApp.factory("settings",function(){
+    return {};
+});
 
 //myApp.controller('faqCtrl', function () {
 //
@@ -262,4 +265,23 @@ myApp.controller('detailUserCtrl', function ($scope, $http, $routeParams) {
                 console.log("error adding friend", errorData, status);
             });
     };
+});
+
+myApp.controller('createGameCtrl', function ($scope, $http, settings) {
+    console.log("create game controller");
+
+
+    $scope.settings = {
+        gameType: "",
+        freeForAll: true,
+        coinLimit: 20,
+        timeLimit: 10,
+        powerUps: false
+    };
+
+    $scope.setGameType = function (type) {
+        $scope.settings.gameType = type;
+    }
+
+
 });

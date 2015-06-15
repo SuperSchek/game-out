@@ -23,6 +23,7 @@ exports.signup = function (req, res) {
                 message: err
             });
         }
+
         // Remove sensitive data before login
         user.password = undefined;
         user.salt = undefined;
@@ -175,7 +176,7 @@ exports.updateOne = function (req, res) {
             doc: doc,
 
             err: err
-        };
+        };clipboardDatano
         return res.send(retObj);
     };
 
